@@ -22,7 +22,8 @@ import os
 import platform
 import time</code></pre>
 ### 2. exe 파일을 사용한 방법   
-추후에 파일 링크를 첨부하겠습니다.
+exe파일 다운로드 링크: [KNUS-다운로드][knuslink]
+[knuslink]: http://gofile.me/4Di5L/3tAWbZE2h "파일 다운로드"
 
 
 ## 사용법
