@@ -4,10 +4,10 @@ block_cipher = None
 
 
 a = Analysis(['KNUS_alpha.py'],
-             pathex=['C:\\Users\\admin\\SynologyDrive\\Python_Projects\\KNUS_alpha'],
+             pathex=['E:\\SynologyDrive\\Python_Projects\\KNUS_alpha'],
              binaries=[],
              datas=[],
-             hiddenimports=[],
+             hiddenimports=['bs4'],
              hookspath=[],
              runtime_hooks=[],
              excludes=[],
@@ -30,4 +30,4 @@ exe = EXE(pyz,
           upx=True,
           upx_exclude=[],
           runtime_tmpdir=None,
-          console=True , icon='cute.ico')
+          console=True , icon='jawoos.ico')
