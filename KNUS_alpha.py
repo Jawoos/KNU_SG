@@ -95,7 +95,7 @@ def get_exelm(tt):
 
 
 def get_cls():
-    global search, cls_time, tempo, every, same, samet, frame0, frame1, frame2, str_sub, code
+    global search, cls_time, tempo, every, same, samet, frame0, frame1, frame2, str_sub, code, find_num
     # 검색한 과목과 같은 과목들 받아옴
     html = requests.get(str_sub).text
     soup = BeautifulSoup(html, "html.parser")
@@ -111,6 +111,7 @@ def get_cls():
         try:
             find_num = tempo.index(code)
         except:
+            # print('getcls err')
             pass
         search.append(tempo[find_num])
         tempo.remove(tempo[find_num])
@@ -142,14 +143,17 @@ def get_cls():
     try:
         frame0.columns = column
     except:
+        # print('frame0 err')
         pass
     try:
         frame1.columns = column
     except:
+        # print('frame1 err')
         pass
     try:
         frame2.columns = column
     except:
+        # print('frame2 err')
         pass
     cls_time = str(search[0][4])
     cls_time = cls_time.replace(" ", "")
@@ -169,7 +173,9 @@ def get_all(list_all):
         try:
             html = requests.get(str_my_knu).text
             soup = BeautifulSoup(html, "html.parser")
-        except:
+            # print(soup)
+        except EOFError:
+            # print('get_all err')
             continue
         # print(soup)
         className = soup.find_all(class_='subj_nm')[2].text
@@ -191,7 +197,8 @@ def get_all(list_all):
 if __name__ == "__main__" :
     basic = ['subj_class_cde', 'subj_nm', 'unit', 'prof_nm', 'lect_wk_tm', 'lect_quota', 'lect_req_cnt']
     column = ['코드', '과목명', '학점', '교수명', '시간', '수강정원', '수강인원']
-    list_temp = ['CLTR112006', 'COME301007', 'COMP320001', 'COMP322005', 'COMP411005', 'ELEC462002', 'ELEC464001']
+    list_temp = ['CLTR273001', 'CLTR273001', 'CLTR273001', 'CLTR273001', 'COMP324004', 'EECS312003', 'ITEC412001']
+    list_temp = []
     every = []  # 검색한 전체 과목
     search = []  # 검색 받은 과목
     same = []  # 같은 과목코드 초기화 예정
@@ -222,15 +229,19 @@ if __name__ == "__main__" :
     # main
     semester = input("현제 학기를 입력해 주세요(ex: 20201): ")
     while True:
+        code_all = input("이번학기 수강신청하고자 하는 과목을 하나씩 입력해 주세요: ")
+        if code_all == 'end':
+            break
+        list_temp.append(code_all)
+    while True:
         try:
             codeSearch = input("검색하고자 하는 과목 코드를 입력해 주세요: ")
-            if codeSearch == '':
+            if codeSearch == 'all':
                 get_all(list_temp)
-            else:
-                # code = 'COME331001'
-                code_subj = codeSearch[:7]  # 과목 분류
-                code_class = codeSearch[7:]  # 분반 세자리
-                num_class = int(codeSearch[9:])  # 분반 한자리
+            elif codeSearch == '':
+                code_subj = code[:7]  # 과목 분류
+                code_class = code[7:]  # 분반 세자리
+                num_class = int(code[9:])  # 분반 한자리
                 str_sub = str_1 + semester + str_2 + str_3 + code_subj  # 검색한 과목과 같은 과목들 표시
                 str_obj = str_a + semester + str_b + code_subj + str_c + code_class + "%27"
                 # print(str_sub)
@@ -239,12 +250,43 @@ if __name__ == "__main__" :
                 print("{0:.^70}".format("검색하신 과목 현황", end="\n\n"))
                 print(frame0, end="\n\n")
                 print("{0:.^70}".format("같은 시간의 같은 과목들", end="\n\n"))
-                print(frame1, end="\n\n")
+                if frame1.empty:
+                    print('같은 시간의 같은 과목이 없습니다.')
+                else:
+                    print(frame1, end="\n\n")
                 print("{0:.^70}".format("다른 시간의 같은 과목들", end="\n\n"))
-                print(frame2, end="\n\n")
+                if frame2.empty:
+                    print('다른 시간의 같은 과목이 없습니다.')
+                else:
+                    print(frame2, end="\n\n")
+                print('================================================')
+            else:
+                # code = 'COME331001'
+                code = codeSearch
+                code_subj = code[:7]  # 과목 분류
+                code_class = code[7:]  # 분반 세자리
+                num_class = int(code[9:])  # 분반 한자리
+                str_sub = str_1 + semester + str_2 + str_3 + code_subj  # 검색한 과목과 같은 과목들 표시
+                str_obj = str_a + semester + str_b + code_subj + str_c + code_class + "%27"
+                # print(str_sub)
+                get_cls()
+                print("\n")
+                print("{0:.^70}".format("검색하신 과목 현황", end="\n\n"))
+                print(frame0, end="\n\n")
+                print("{0:.^70}".format("같은 시간의 같은 과목들", end="\n\n"))
+                if frame1.empty:
+                    print('같은 시간의 같은 과목이 없습니다.')
+                else:
+                    print(frame1, end="\n\n")
+                print("{0:.^70}".format("다른 시간의 같은 과목들", end="\n\n"))
+                if frame2.empty:
+                    print('다른 시간의 같은 과목이 없습니다.')
+                else:
+                    print(frame2, end="\n\n")
                 print('================================================')
                 # get_exelm(cls_time)
                 # print("{0:.^70}".format("같은 시간의 다른 전공 과목들", end="\n\n"))
                 # print(frame3, end="\n\n")
-        except:
+        except EOFError:
+            print('main err')
             pass

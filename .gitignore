@@ -10,5 +10,4 @@ KNUS_beta.py
 __pycache__
 .idea
 build
-dist
 venv
