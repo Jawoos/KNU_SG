@@ -6,16 +6,8 @@
 
 ## Table of Contents
 
-- [Background](#background)
-- [Install](#install)
-- [Usage](#usage)
-	- [Generator](#generator)
-- [Badge](#badge)
-- [Example Readmes](#example-readmes)
-- [Related Efforts](#related-efforts)
-- [Maintainers](#maintainers)
-- [Contributing](#contributing)
-- [License](#license)
+- [설치 방법](#설치 방법)
+- [사용법](#사용법)
 
 
 ## 설치 방법
@@ -32,6 +24,6 @@ main.py를 다운받아서 실행시키면 된다.
 2. exe 파일을 사용한 방법
 추후에 파일 링크를 첨부하겠습니다.
 
-## Usage
 
+## 사용법
 사용법을 추후에 첨부하겠습니다.
