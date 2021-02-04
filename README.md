@@ -14,13 +14,13 @@
 설치 방법에는 2가지 방법이 있다.
 1. 파이썬을 이용하는 방법
 main.py를 다운받아서 실행시키면 된다.
-필요한 파이썬 패키지
-- from bs4 import BeautifulSoup
-- from pandas import DataFrame
-- import requests
-- import os
-- import platform
-- import time
+사용된 파이썬 패키지
+- bs4
+- pandas
+- requests
+- os
+- platform
+- time
 2. exe 파일을 사용한 방법
 추후에 파일 링크를 첨부하겠습니다.
 
