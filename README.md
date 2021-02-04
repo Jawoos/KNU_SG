@@ -15,12 +15,12 @@
 1. 파이썬을 이용하는 방법   
 main.py를 다운받아서 실행시키면 된다.   
 사용된 파이썬 패키지   
-- bs4
-- pandas
-- requests
-- os
-- platform
-- time
+  - bs4
+  - pandas
+  - requests
+  - os
+  - platform
+  - time
 2. exe 파일을 사용한 방법   
 추후에 파일 링크를 첨부하겠습니다.
 
