@@ -22,7 +22,7 @@ import os
 import platform
 import time</code></pre>
 ### 2. exe 파일을 사용한 방법   
-[exe파일 다운로드 링크](http://gofile.me/4Di5L/fSV1kbNyA)   
+[exe파일 다운로드 링크](http://gofile.me/4Di5L/r7QEOhKPu)   
 exe 파일을 실시킨다.   
 실행시 화면이 출력될 때까지 시간이 좀 소요된다...
 
