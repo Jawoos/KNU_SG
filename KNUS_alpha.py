@@ -4,6 +4,7 @@ import requests
 import os
 import platform
 import time
+import msvcrt
 
 
 def clear():
@@ -37,7 +38,7 @@ def get_cls():
         # tempo.remove(tempo[num_class - 1])
         try:
             find_num = tempo.index(code)
-        except:
+        except :
             # print('getcls err')
             pass
         search.append(tempo[find_num])
@@ -69,17 +70,17 @@ def get_cls():
 
     try:
         frame0.columns = column
-    except:
+    except :
         # print('frame0 err')
         pass
     try:
         frame1.columns = column
-    except:
+    except :
         # print('frame1 err')
         pass
     try:
         frame2.columns = column
-    except:
+    except :
         # print('frame2 err')
         pass
     cls_time = str(search[0][4])
@@ -101,7 +102,7 @@ def get_all(list_all):
             html = requests.get(str_my_knu).text
             soup = BeautifulSoup(html, "html.parser")
             # print(soup)
-        except EOFError:
+        except :
             # print('get_all err')
             continue
         # print(soup)
@@ -117,7 +118,7 @@ def get_all(list_all):
         now_per = now_per[2].text
         print(max_per, end='\t')
         print(now_per)
-        print('=========================================')
+        print('==================================================================================')
         j += 1
 
 
@@ -180,9 +181,12 @@ if __name__ == "__main__":
             print('-------------------------')
         except FileNotFoundError:
             print('현재 관심 종목이 없습니다.')
+            f = open(semester + '.txt', 'w')
+            f.close()
         temp = input('다음중 원하는 행동을 선택해 주세요(1: 관심 과목을 추가하기 2: 관심 과목 삭제하기 3: 계속 진행하기): ')
         if temp == '1':
-            code_all = input("추가하려는 관심 과목 코드를 입력해 주세요.: ")
+            code_all = input("추가하려는 관심 과목 코드를 입력해 주세요: ")
+            code_all = code_all.upper()
             if len(code_all) != 10 or code_all.isalnum() != True:  # 잘못된 코드 입력
                 print('잘못된 과목코드가 입력 되었습니다. 다시 입력해 주세요.')
                 time.sleep(1)
@@ -191,6 +195,7 @@ if __name__ == "__main__":
             list_subject.append(code_all)
         elif temp == '2':
             code_all = input("삭제하려는 관심 과목 코드 혹은 번호를 입력해 주세요: ")
+            code_all = code_all.upper()
             if code_all.isdigit() and int(code_all) < len(list_subject):
                 del list_subject[int(code_all)]
             elif len(code_all) != 10 or code_all.isalnum() != True:  # 잘못된 코드 입력
@@ -213,12 +218,17 @@ if __name__ == "__main__":
                 print(i, ": ", list_subject[i])
             print('-------------------------')
             codeSearch = input("검색하고자 하는 과목 코드 혹은 위에 리스트의 번호를 입력해 주세요: ")
-            if codeSearch == 'all':
+            codeSearch = codeSearch.upper()
+            if codeSearch == 'ALL':
+                clear()
+                print('==================================================================================')
                 get_all(list_subject)
+                continue
             elif codeSearch == '' and code != '':
                 pass
-            elif int(codeSearch) < len(list_subject) and codeSearch.isdigit():
-                code = list_subject[int(codeSearch)]
+            elif codeSearch.isdigit():
+                if int(codeSearch) < len(list_subject):
+                    code = list_subject[int(codeSearch)]
             else:
                 if len(codeSearch) != 10 or codeSearch.isalnum() != True:
                     print('잘못된 과목코드가 입력 되었습니다. 다시 입력해 주세요.')
@@ -236,17 +246,17 @@ if __name__ == "__main__":
             # print("\n")
             clear()
             print("{0:.^70}".format("검색하신 과목 현황", end="\n\n\n"))
-            print(frame0, end="\n\n")
+            print(frame0, end="\n\n\n")
             print("{0:.^70}".format("같은 시간의 같은 과목들", end="\n\n\n"))
             if frame1.empty:
-                print('\t같은 시간의 같은 과목이 없습니다.')
+                print('\t같은 시간의 같은 과목이 없습니다.\n')
             else:
-                print(frame1, end="\n\n")
+                print(frame1, end="\n\n\n")
             print("{0:.^70}".format("다른 시간의 같은 과목들", end="\n\n\n"))
             if frame2.empty:
-                print('\t다른 시간의 같은 과목이 없습니다.')
+                print('\t다른 시간의 같은 과목이 없습니다.\n')
             else:
-                print(frame2, end="\n\n")
+                print(frame2, end="\n\n\n")
             print('================================================')
-        except:
+        except :
             pass
