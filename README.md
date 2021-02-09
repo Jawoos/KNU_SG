@@ -40,3 +40,23 @@ exe 파일을 실시킨다.
 검색한 결과는 다음과 같이 내가 검색한 과목의 시간을 기준으로 구분하여 알려줍니다!   
 ![검색과목 현황](https://user-images.githubusercontent.com/49528515/106890294-73907100-672c-11eb-8625-ec800b286eb5.PNG)
 
+## 코드구성
+<pre><code>def clear()</code></pre>
+사용자 터미널(cmd)창 내용 지우기
+<pre><code>def get_cls()</code></pre>
+사용자 검색 과목을 받아 크롤링   
+크롤링 결과를 검색 과목 시간을 기준으로 분류   
+분류한 자료를 데이터프레임에 저장
+<pre><code>def get_all()</code></pre>
+사용자의 관심종목 리스트를 받아 크롤링   
+크롤링 결과를 데이터프레임에 저장
+<pre><code>def get_list()</code></pre>
+입력받은 학기 정보와 같은 이름의 txt 파일을 받아와 저장되어 있는 관심 종목을 리스트에 저장   
+<pre><code>def write_list()</code></pre>
+관심 종목 리스트를 파일로 저장
+<pre><code>__main__</code></pre>
+학기정보를 입력 받음   
+get_list() 함수를 호출
+관심종목 추가 여부를 확인
+검색하고자 하는 과목 코드를 입력 받음
+검색 결과 
