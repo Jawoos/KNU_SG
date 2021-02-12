@@ -11,8 +11,8 @@
 - [코드 구성](#코드-구성)
 
 ## 설치 방법
-설치 방법에는 2가지 방법이 있다.
-### 1. 파이썬을 이용하는 방법   
+
+### 파이썬을 이용하는 방법   
 main.py를 다운받아서 실행시키면 된다.   
 사용된 파이썬 패키지   
 <pre><code>from bs4 import BeautifulSoup
@@ -21,10 +21,7 @@ import requests
 import os
 import platform
 import time</code></pre>
-### 2. exe 파일을 사용한 방법   
-[exe파일 다운로드 링크](http://gofile.me/4Di5L/r7QEOhKPu)   
-exe 파일을 실시킨다.   
-실행시 화면이 출력될 때까지 시간이 좀 소요된다...
+
 
 ## 사용법
 시작화면입니다!
