@@ -16,12 +16,14 @@
 ### 1. 파이썬을 이용하는 방법   
 main.py를 다운받아서 실행시키면 된다.   
 사용된 파이썬 패키지   
-<pre><code>from bs4 import BeautifulSoup
+```{.python}
+from bs4 import BeautifulSoup
 from pandas import DataFrame
 import requests
 import os
 import platform
-import time</code></pre>   
+import time
+```
 ### 2. exe 파일을 사용한 방법   
 [exe파일 다운로드 링크](http://gofile.me/4Di5L/K7CLU5Iea)   
 exe 파일을 실시킨다.   
@@ -42,20 +44,117 @@ exe 파일을 실시킨다.
 ![검색과목 현황](https://user-images.githubusercontent.com/49528515/106890294-73907100-672c-11eb-8625-ec800b286eb5.PNG)
 
 ## 코드 구성
-<pre><code>def clear()</code></pre>
+```{.python}
+def clear():
+    system = 시스템 정보 받기
+    if system is 윈도우
+        'cls' 명령어 실행
+    elif system is 리눅스 혹은 맥
+        'clear' 명령어 실행
+```
 사용자 터미널(cmd)창 내용 지우기
-<pre><code>def get_cls()</code></pre>
+```{.python}
+def get_cls():
+    tempo = 임시 저장 리스트
+    samet = 같은 시간 과목 리스트
+    dift = 다른 시간 과목 리스트
+    html = 과목 정도 받아오기
+    soup = bs4 사용(html.parser)
+    b = 클라스로 과목정보 찾기
+    for i less then len(basic):
+        b에서 과목 정보 리스트로 받기
+        과목 정보를 tempo에 저장
+        if 사용자가 검색한 과목
+            find_num = 인덱스 번호 저장
+    for i less then len(tempo):
+        if 사용자 검색 과목과 같은 시간
+            samet에 저장
+        else
+            dift에 저장
+    samet와 dift를 데이타 프레임에 저장하여 출력
+```
 사용자 검색 과목을 받아 크롤링   
 크롤링 결과를 검색 과목 시간을 기준으로 분류   
 분류한 자료를 데이터프레임에 저장
-<pre><code>def get_all()</code></pre>
+```
+def get_all(list_all):  # 관심종목 리스트 인자로 받음
+    while j < len(list_all):
+        html = 관심 종목 정보 크롤링
+        soup = bs4 사용(html.parser)
+        className = soup.find 과목명
+        ProfName = soup.find 교수명
+        classCode = soup.find 과목코드
+        max_per = soup.find 과목 정원
+        now_per = soup.find 현재 수강인원
+        print(과목정보들)
+```
 사용자의 관심종목 리스트를 받아 크롤링   
 크롤링 결과를 데이터프레임에 저장
-<pre><code>def get_list()</code></pre>
+```
+def get_list():
+    temp_list = 관심 과목 받을 리스트
+    f = 입력한 학기와 같은 이름의 txt 파일 open
+    lines = read lines from f
+    for line in lines:
+        line = line의 앞 10글자만 받기
+        if len(line) != 10 or line이 영어 혹은 숫자로만 이루어지지 않았다면:   # 잘못된 코드 입력
+            continue
+        temp_list에 line 저장
+    f.close()
+    return temp_list
+```
 입력받은 학기 정보와 같은 이름의 txt 파일을 받아와 저장되어 있는 관심 종목을 리스트에 저장   
-<pre><code>def write_list()</code></pre>
+```
+def write_list(code_list):  # 관심종목 리스트 인자로 받기
+    f = 입력한 학기와 같은 이름의 txt 파일 open
+    for data in code_list:
+        f에 데이터 입력
+    f.close()
+```
 관심 종목 리스트를 파일로 저장
-<pre><code>__main__</code></pre>
+```
+__main__
+    basic = 과목 구성 정보 리스트
+    column = 과목 구성 정보 이름
+    list_subject = 관심종목 리스트
+    
+    semester = 학기 정보 입력 받기
+    while True:
+        print(관심종목)
+        temp = 관심 종목 추가, 관심 종목 삭제, 다음으로 넘어가기 중 선택
+        if 관심종목 추가:
+            code_all = 관심종목 코드 입력 받기
+            관심 종목 소문자 전부 대문자로 변환
+            관심 종목이 유효한지 검사
+            list_subject에 저장
+        elif 관심 종목 삭제:
+            code_all = 관심종목 코드 혹은 리스트 번호 입력 받기
+            관심 종목 소문자 전부 대문자로 변환
+            관심 종목이 유효한지 검사
+            if 리스트 번호:
+                해당 리스트 번호 삭제
+            else:
+                과목코드 유효성 검사
+                list_subject에서 삭제
+        else:
+            break
+    while True:
+        print(현재 관심 종목 리스트)
+        codeSearch  = 검색하고자 하는 과목코드 혹은 관심 종목 리스트 번호
+        codeSearch 소문자 전부 대문자 변환
+        if codeSearch == 'ALL'
+            get_all(list_subject)으로 관심 종목 현황 표시
+            continue
+        elif codeSearch == 리스트 번호:    
+            code = 리스트 번호에 해당하는 관심 과목 코드
+        else:
+            과목코드 유효성 검사
+        get_cls()로 검색한 과목에 대한 정보 받아오기
+        clear()
+        print(검색한 과목 정보)
+        print(검색한 과목과 같은 시간 정보)
+        print(검색한 과목과 다른 시간 정보)
+```
 학기정보를 입력 받음   
 get_list() 함수를 호출   
 관심종목 추가 여부를 확인   
