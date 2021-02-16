@@ -2,14 +2,14 @@
 
 경북대 수강신청시 내가 수강하고 하는 과목의 잔여자리와 그와 같은 과목코드를 가진 과목들의 잔여자리를 한번에 확인할 수 있도록 만든 프로그램이다.   
 같은 과목코드를 가진 강의들은 내가 검색한 과목과의 시간을 기준으로 같은 시간인지 다른 시간인지 구분된다.
-
-
-## Table of Contents
+---
+## 목차
 
 - [설치 방법](#설치-방법)
 - [사용법](#사용법)
 - [코드 구성](#코드-구성)
-
+    - [KNUS_alpha.py](#KNUS_alphapy)
+---
 ## 설치 방법
 
 설치 방법에는 2가지 방법이 있다.
@@ -24,11 +24,12 @@ import os
 import platform
 import time
 ```
+
 ### 2. exe 파일을 사용한 방법   
 [exe파일 다운로드 링크](http://gofile.me/4Di5L/K7CLU5Iea)   
 exe 파일을 실시킨다.   
 실행시 화면이 출력될 때까지 시간이 좀 소요된다...
-
+---
 ## 사용법
 시작화면입니다!
 ![시작화면](https://user-images.githubusercontent.com/49528515/106889792-d59ca680-672b-11eb-82f3-92374e945954.PNG)
@@ -42,8 +43,10 @@ exe 파일을 실시킨다.
 ![검색할 리스트](https://user-images.githubusercontent.com/49528515/106889940-0b418f80-672c-11eb-9a54-a538585344fc.PNG)
 검색한 결과는 다음과 같이 내가 검색한 과목의 시간을 기준으로 구분하여 알려줍니다!   
 ![검색과목 현황](https://user-images.githubusercontent.com/49528515/106890294-73907100-672c-11eb-8625-ec800b286eb5.PNG)
-
+---
 ## 코드 구성
+### KNUS_alpha.py
+#### 사용자 터미널(cmd)창 내용 지우기
 ```{.python}
 def clear():
     system = 시스템 정보 받기
@@ -52,7 +55,7 @@ def clear():
     elif system is 리눅스 혹은 맥
         'clear' 명령어 실행
 ```
-사용자 터미널(cmd)창 내용 지우기
+#### 입력된 과목과 같은 과목 크롤링 및 데이터 정리
 ```{.python}
 def get_cls():
     tempo = 임시 저장 리스트
@@ -73,9 +76,7 @@ def get_cls():
             dift에 저장
     samet와 dift를 데이타 프레임에 저장하여 출력
 ```
-사용자 검색 과목을 받아 크롤링   
-크롤링 결과를 검색 과목 시간을 기준으로 분류   
-분류한 자료를 데이터프레임에 저장
+#### 관심 종목 정보 크롤링
 ```
 def get_all(list_all):  # 관심종목 리스트 인자로 받음
     while j < len(list_all):
@@ -88,8 +89,7 @@ def get_all(list_all):  # 관심종목 리스트 인자로 받음
         now_per = soup.find 현재 수강인원
         print(과목정보들)
 ```
-사용자의 관심종목 리스트를 받아 크롤링   
-크롤링 결과를 데이터프레임에 저장
+#### 저장되어있는 관심종목 읽어오기
 ```
 def get_list():
     temp_list = 관심 과목 받을 리스트
@@ -103,7 +103,7 @@ def get_list():
     f.close()
     return temp_list
 ```
-입력받은 학기 정보와 같은 이름의 txt 파일을 받아와 저장되어 있는 관심 종목을 리스트에 저장   
+#### 입력받은 관심 종목 업데이트
 ```
 def write_list(code_list):  # 관심종목 리스트 인자로 받기
     f = 입력한 학기와 같은 이름의 txt 파일 open
@@ -111,7 +111,7 @@ def write_list(code_list):  # 관심종목 리스트 인자로 받기
         f에 데이터 입력
     f.close()
 ```
-관심 종목 리스트를 파일로 저장
+#### 메인 함수
 ```
 __main__
     basic = 과목 구성 정보 리스트
